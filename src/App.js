@@ -3,7 +3,8 @@ import Home from './components/home';
 import About from './components/about';
 import Cart from './components/cart';
 import Categories from './components/categories';
-import NavMenu from './navmenu'; // Assuming this is a non-routing component
+import NavMenu from './navmenu'; 
+import Details from './components/Details';
 
 function App() {
   return (
@@ -15,8 +16,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/categories" element={<Categories />} />
-          {/* Add a catch-all route to render Home if no route matches */}
-          <Route path="*" element={<Home />} />
+          <Route path='/details' element={<Details />} />
         </Routes>
       </Router>
     </div>

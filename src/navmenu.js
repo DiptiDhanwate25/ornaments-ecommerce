@@ -1,10 +1,13 @@
+//navmenu.js
+
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './navmenu.css';
-import './images/logo.jpg'
 import { useNavigate } from 'react-router-dom';
-import { categories } from './Data/catrgoriesData'; 
+import { categories } from './Data/catrgoriesData';
+import Categories from './components/categories';
+
 
 function NavMenu() {
   const validationSchema = Yup.object().shape({
@@ -18,34 +21,28 @@ function NavMenu() {
   const [fetchedCategories, setFetchedCategories] = useState([]);
 
   useEffect(() => {
-    // Simulating fetching data using setTimeout (Replace this with actual fetch logic)
     const fetchData = () => {
-      // You can replace this setTimeout with your actual data fetching logic using fetch or Axios
       setTimeout(() => {
         setFetchedCategories(categories);
-      }, 1000); // Simulating delay for fetching data (remove this in actual implementation)
+      }, 1000);
     };
 
     fetchData();
-  }, []); // Empty dependency array - runs effect only on component mount
+  }, []);
 
   const handleCategoriesClick = () => {
-    setShowCategories(!showCategories); // Toggle dropdown visibility
+    setShowCategories(!showCategories);
   };
 
   const handleCategorySelect = (category) => {
     const filteredCategory = fetchedCategories.filter((cat) => cat.type === category);
     setSelectedCategoryData(filteredCategory);
     setShowCategories(false);
-
-    // Navigate to the '/categories' route after category selection
     navigate('/categories');
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
     console.log('Search Query:', values.searchQuery);
-    // Your authentication or search logic here
-
     setSubmitting(false);
   };
 
@@ -68,7 +65,6 @@ function NavMenu() {
                   <ul>
                     <li onClick={() => handleCategorySelect('Male')}>Mens</li>
                     <li onClick={() => handleCategorySelect('Female')}>Womens</li>
-                   
                   </ul>
                 </div>
               )}
@@ -101,19 +97,13 @@ function NavMenu() {
         </div>
       </div>
 
-      {selectedCategoryData.length > 0 && (
-        <div className="selected-category">
-          <ul>
-            {selectedCategoryData.map((category, index) => (
-              <li key={index}>
-                <p>Name: {category.name}</p>
-                <p>Price: {category.price}</p>
-                <img src={category.image} alt={category.name} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {/* Display selectedCategoryData from Categories component */}
+      <Categories
+        selectedCategoryData={selectedCategoryData}
+        setSelectedCategoryData={setSelectedCategoryData}
+        setShowCategories={setShowCategories}
+        fetchedCategories={fetchedCategories}
+      />
     </div>
   );
 }

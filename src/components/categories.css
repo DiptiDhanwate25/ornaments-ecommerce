@@ -1,0 +1,23 @@
+.selected-category ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 20px; /* Gap between columns and rows */
+  }
+  
+  .selected-category li {
+    box-sizing: border-box;
+    padding: 15px;
+    border: 1px solid #ccc; /* Example border */
+  }
+  
+  .selected-category li img {
+    width: 100%; /* Image takes the full width of the box */
+    height: 150px; /* Example height for the image */
+    object-fit: cover; /* Maintain aspect ratio */
+    margin-bottom: 10px;
+  }
+  
+  .selected-category li p {
+    margin: 5px 0;
+  }
+  
